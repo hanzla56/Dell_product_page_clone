@@ -39,3 +39,4 @@ class Product_image(models.Model):
         return mark_safe('<img src="%s" width="100px" height="100px" />'%(self.image.url))
     image_tag.short_description = 'Image'
     
+#This is my comment for checking if any change occurs in main branch 
