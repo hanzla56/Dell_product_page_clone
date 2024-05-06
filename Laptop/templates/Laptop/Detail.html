@@ -1,0 +1,202 @@
+{% extends "Laptop/Base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "Laptop/css/detail.css" %}"> {% endblock css %}
+{% block content %}
+
+<div class="container mt-5" id="form_container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 d-flex align-items-center" style="background-color: #0672CB;">
+      <form action="" method="post" id="edit_form" enctype="multipart/form-data"
+        class=" d-inline-block mx-auto p-5">
+        <input type="text" name="name" class="form-control" placeholder="Enter Product name"
+          value="{{ s_product.name }}">
+        <br>
+        {% csrf_token %}
+        <input type="text" name="price" class="form-control" placeholder="Enter Price" value="{{ s_product.price }}">
+        <br>
+        <input type="text" name="memory" class="form-control" placeholder="Enter Memory" value="{{ s_product.memory }}">
+        <br>
+        <input type="text" name="os" class="form-control" placeholder="Enter os" value="{{ s_product.os }}">
+        <br>
+        <input type="text" name="processor" class="form-control" placeholder="Enter Processor"
+          value="{{ s_product.full_processor_details }}">
+        <br>
+        <input type="submit" class="form-control" name="" id="">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid mt-5">
+  <div class="row border border-primary">
+    <div class="col-lg-6 border border-danger first-div">
+      <h3 id="heading">{{s_product.name}}</h3>
+
+      <div class="left-div border border-danger">
+
+
+        <div class="vertical-slider d-flex flex-column mt-5 ms-4">
+          <div class="text-center icons">
+            <i class="bi bi-chevron-up" id="entity1"></i>
+          </div>
+          <div class="outer">
+
+
+            <div class="slider-list text-center justify-content-center align-items-center">
+              <div class="d-flex align-items-center justify-content-center image-container border">
+                <img src="{{s_product.main_img.url}}" class="change-img" alt="dd" height="30px" width="45px" />
+              </div>
+              {% for product_image in s_product.p_image.all %}
+              <div class="d-flex align-items-center justify-content-center image-container border">
+                <img src="{{product_image.image.url}}" class="change-img" alt="dd" height="30px" width="45px" />
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="text-center icons">
+            <i class="bi bi-chevron-down"></i>
+          </div>
+        </div>
+
+        <div class="mt-4 d-img">
+          <img src="{{s_product.main_img.url}}" class="img-fluid main-img" alt="" />
+        </div>
+
+      </div>
+      <div>
+        <div class="ms-4 mt-5">
+
+          <span id="product-price" style="font-size: 20px; font-weight:bold">${{s_product.price}}.00</span>
+          <span><span style="color: #0672CB;">You save </span>$90.00</span>
+          <br>
+          <span id="p-match"><a href="">Price Match guarantee</a></span>
+          <br>
+          <span>Free shipping</span>
+          <br>
+          <h5>Financing Offers</h5>
+          <span>When opening a Dell Pay CreditB or Dell Business Credit^ account, get:</span>
+          <br>
+          <ul>
+            <li>Special financing offersB ,^</li>
+            <li>Rewards* on every financing purchaseB ,^ when you enroll in Dell RewardsD</li>
+            <li>Exclusive access to Express Checkout
+            </li>
+          </ul>
+          <button class="btn btn-outline-primary" id="product-btn-2">Learn More</button>
+          <span class="ms-2 p-2" id="p-1">Pre qualify Now</span>
+          <br>
+          <br>
+ 
+          <span class="mt-2"><a href="">View Special Offers</a></span>
+          <span class="ms-2 mt-2">Dell Rewards Earn 2,937 Points</span>
+        </div>
+      </div>
+    </div>
+    <div class="border border-danger col-lg-6 half-div">
+      <div class="border border-warning bg-white">
+        <div class="row shadow-lg p-3 mb-5 bg-white rounded m-2">
+          <h5 class="">Processor</h5>
+          <div class="info-div">
+
+            <div class="p-3 px-2 border border-primary active item" onclick="toggleActive(this)">
+             {{s_product.full_processor_details}}
+            </div>
+            <div class="p-3 border border-primary item" onclick="toggleActive(this)">
+              {{s_product.full_processor_details}}
+            </div>
+            <div class="p-3 border border-primary item" onclick="toggleActive(this)">
+              {{s_product.full_processor_details}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row shadow-lg p-3 mb-5 bg-white rounded m-2">
+        <h5>Operating System</h5>
+        <div class="col-lg-12">
+          <p>Dell Technologies recommends Windows 11 Pro for business</p>
+          <span>Warranty support options vary by operating system: Dell offers
+            support plans for businesses with Windows Pro and support plans for
+            personal use with Windows Home</span>
+        </div>
+        <div class="second-info-div mt-3">
+          <div class="p-3 px-2 border border-primary active second-item" onclick="toggleActive(this)">
+            {{s_product.os}}
+          </div>
+          <div class="p-3 border border-primary second-item" onclick="toggleActive(this)">
+            {{s_product.os}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+
+<script>
+  let product_id = '{{s_product.id}}';
+  console.log(product_id)
+  let form = document.getElementById('edit_form'); // Corrected ID
+  console.log(form);
+  let product = window.product_id;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+
+    var form_data = new FormData(this);
+    console.log(form_data)
+
+    Update_Data(form_data, product_id);
+    // Pass form_data and product_id
+    form_container.classList.remove('d-block');
+    form_container.classList.add('d-none');
+  })
+
+  function Update_Data(form_data, product_id) {
+    $.ajax({
+      url: "/update/" + product_id,
+      type: "POST",
+      data: form_data,
+      processData: false,  // Ensure form data is not processed
+      contentType: false,  // Ensure content type is not set
+      success: function (response) {
+        console.log('call back is successfull')
+        console.log(response);
+        $('#heading').text(response.code.name); 
+
+        $('.item').each(function(index) {
+        $(this).text(response.code.processor); // Set different text content for each div
+        });
+
+        $('.second-item').each(function(index) {
+          $(this).text(response.code.os); // Set different text content for each div
+          });
+
+        
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
+
+  /*function Update_Data(form_data, product_id) { // Include product_id parameter
+    fetch("/update/" + product_id, {
+      method: "POST",
+      body: form_data
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+  }*/
+</script>
+
+<script src="{% static "Laptop/js/Detail.js" %}"></script>
+{% endblock js %}

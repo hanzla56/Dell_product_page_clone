@@ -25,6 +25,7 @@ class Laptop(models.Model):
     memory = models.CharField(max_length=20)
     display = models.FloatField()
     product_line = models.ForeignKey(product_line,on_delete=models.CASCADE)
+    main_img = models.ImageField()
     
     def __str__(self):
         return self.name
@@ -32,7 +33,7 @@ class Laptop(models.Model):
     
 class Product_image(models.Model):
     image = models.ImageField()
-    product = models.ForeignKey(Laptop, on_delete=models.CASCADE)
+    product = models.ForeignKey(Laptop, on_delete=models.CASCADE, related_name='p_image')
     
       
     def image_tag(self):

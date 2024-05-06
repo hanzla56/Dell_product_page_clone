@@ -1,0 +1,181 @@
+body{
+  font-family: "Roboto", sans-serif;
+}
+
+.custom-active{
+  border: 2px solid #007DB8;
+  padding: 3px;
+}
+.active {
+    background-color: #EDF9FF !important;
+     /* Optional: Change text color for better readability */
+  }
+#p-match a{
+  text-decoration: none;
+  font-size: 12px;
+}
+#p-match:hover a{
+  text-decoration: underline;
+
+}
+#product-btn-2:hover{
+  background-color: #D9F5FD;
+  color: #007DB8;
+}
+#p-1:hover{
+  background-color: #D9F5FD;
+}
+#heading{
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-size: 40px;
+      line-height: 48px;
+      font-weight: 300;
+  }
+.info-div{
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+.item{
+  width: 33%;
+  flex: 0 0 33%; 
+
+}
+.second-info-div{
+  display: flex;
+  gap: 15px;
+}
+.second-item{
+  width: 33%;
+}
+/* .form-container{
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  background-color: yellow;
+} */
+.custom-input{
+  height: 50px;
+  width: 400px;
+}
+.half-div{
+  background-color: #FFFFFF;
+}
+.first-div{
+  background-color: #F5F6F7;
+}
+#entity1{
+    transform: rotate(-90deg);
+    color: red;
+    height: 200px;
+}
+.vertical-slider {
+    height: 250px; /* Adjust for 5 images * 30px height (or desired visible area) */ /* Match image container width */
+  }
+  
+  .outer {
+    /* display: flex; 
+    flex-direction: row;
+    gap: 10px; */
+   
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .slider-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .image-container {
+    height: 55px; /* Adjust for image container height */
+    width: 55px; /* Match image container width */
+    padding: 3px;
+  }
+  
+  .image-container img {
+    height: 70%;
+    width: 100%;
+/* Optional: Scale images to fit */
+  }
+  
+  .slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px; /* Adjust spacing between controls and slider */
+  }
+  
+  .slider-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white; /* Adjust button color */
+    font-size: 20px; /* Adjust button font size */
+    opacity: 0.5; /* Adjust button opacity */
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .slider-button:hover {
+    opacity: 1;
+  }
+  
+  /* Optional: Style slider controls for Bootstrap compatibility */
+  .vertical-slider.d-flex {
+    flex-direction: row; /* Maintain vertical layout */
+  }
+  .left-div{
+    display: flex;
+
+  }
+  @media (max-width:760px){
+    .left-div{
+        flex-direction: column-reverse;
+    }
+    .vertical-slider{
+      height: 80px;
+    }
+    .info-div{
+      flex-direction: column;
+      /* flex-wrap: wrap; */
+      gap: 15px;
+    }
+    .item{
+      width: 100%;
+    }
+    .second-info-div{
+      flex-direction: column;
+      gap: 15px;
+    }
+    .second-item{
+      width: 100%;
+    }
+    .half-div{
+      padding: 0% !important;
+    }
+    .icons{
+      display: none;
+    }
+    .outer{
+      overflow-x: auto;
+    }
+    .image-container{
+      min-width: 50px;
+    }
+    /* .d-img{
+      height: 340px;
+    } */
+    .slider-list{
+      display: flex;
+      gap: 10px;
+      min-width: 100px; /* Set a minimum width */
+      /* max-width: 100%; Optionally, set a maximum width */
+/* Set a height for the scrolling area */
+      flex-direction: row;
+      overflow-x: auto; /* Enable horizontal scrolling */
+      border: 2px solid yellow;
+      white-space: nowrap; /* Prevent wrapping of flex items */
+    }
+
+  }

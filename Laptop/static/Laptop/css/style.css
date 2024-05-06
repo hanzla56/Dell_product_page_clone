@@ -1,0 +1,342 @@
+body{
+    font-family: "Roboto", sans-serif;
+}
+/* *{
+    border: 1px solid #000;
+} */
+.view_more #text_change,
+.view_more #entity {
+    color: rgb(0, 99, 184);
+}
+/* .lazy-content{
+    background-color: red;
+    border: 2px solid yellow;
+} */
+.accordion-button:hover{
+    color: #0672CB;
+}
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 5px;
+    display: inline-block;
+}
+.circle-active{
+    border: 1px solid #007bff;
+    padding: 2px;
+}
+#circle1.selected, #circle2.selected {
+    background-color: #007bff; /* Change color for selected state */
+}
+
+#heading{
+    color: yellow;
+}
+.below-price{
+    text-align: end;
+}
+.custom-font{
+    font-size: 16px;
+    font-weight: normal;
+    font-weight: 700;
+    line-height: 28px;
+    min-width: 95px;
+}
+.custom-active{
+    border: 2px solid #007DB8;
+    padding: 3px;
+}
+.custom-hover:hover{
+    border: 2px solid #007DB8;
+    padding: 3px;
+}
+.card_price_text:before {
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 12px;
+    background-color: blue;
+    margin-right: 10px;
+    margin-left: 10px;
+    /* Adjust as needed */
+}
+.inner{
+    width: 50%;
+    height: 35px;
+    gap: 10px;
+    
+}
+.inner-2{
+    border: 1px solid blue;
+    color: #0672CB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inner-2:hover{
+    background-color: #D9F5FD;
+}
+.inner-1{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+}
+.L-m-n{
+    color: #0672CB;
+}
+.L-m {
+    position: relative;
+}
+
+.L-m::after {
+    content: "";
+    position: absolute;
+    top: 100;
+    margin-left: 3px;
+    height: 70%;
+    border-right: 1px solid blue;
+}
+#product-title{
+    color: rgb(0, 99, 184);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+}
+#product-title a{
+    text-decoration: none;
+}
+#product-price{
+    font-weight: bold;
+}
+#product-title a:hover{
+    text-decoration: underline;
+}
+.row h5{
+    color: rgb(99, 99, 99);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    font-style: normal;
+}
+.spec-detail{
+    color: rgb(14, 14, 14);
+    font-weight: 400;
+    line-height: 24px;
+    font-style: normal;
+}
+.custom-class{
+    /* background-color: transparent !important; */
+    border: red;
+    box-shadow: none;
+}
+.accordion-button:focus{
+    box-shadow: none !important;
+}
+.view_more p{
+    margin-bottom: 0;
+}
+.card_price_text{
+    text-align: end;
+    margin-right: 10px;
+}
+#Hero-div{
+    background-color: #004A77;
+}
+.custom-rounded-top {
+    border-top-left-radius: 30px; /* Increase the rounding for top left corner */
+    border-top-right-radius: 30px; /* Increase the rounding for top right corner */
+    border: 1px solid blue;
+    background-color: red;
+}
+#product-btn-1:hover{
+    background-color: #DAF5FD;
+    color: #002D4B;
+}
+#product-btn-1{
+    font-style: normal;
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 700;
+    color:white;
+    border: #ffffff;
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 0;
+}
+#product-btn-2:hover{
+    background-color: #D9F5FD;
+}
+#product-btn-2{
+    color: #0063B8;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 700;
+    border-radius: 0;
+}
+.active{
+    background-color: #E1E1E1;
+    border-top: 4px solid #002D4B;
+}
+.top-nav:hover{
+    background-color: #F5F6F7;
+    border-top: 4px solid #0672CB;
+}
+.nav-bar{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    min-width: 150px;
+}
+.nav-div{
+    overflow-x: auto;
+}
+.key-features{
+    border-left: 1px solid #0672CB;
+}
+.for_text_align{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    margin-top: 5px;
+}
+/* .product-card {
+    width: 100% !important;
+} */
+/* Maximum_Width--------- */
+@media (max-width:991px){
+    .acc-div{
+        display: none;
+    }
+}
+
+@media (max-width:1580px) {
+    .spec-detail{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .custom-font{
+        font-size: 14px;
+        line-height: 21px;
+    }
+}
+@media (max-width: 1365px) {
+    .col-xl-4,.pr-price{
+        flex: 0 0 100%; /* Prevent columns from stacking */
+        max-width: 100%; /* Ensure columns take full width */
+        margin-left: 0;
+    }
+    .key-features{
+        border-top: 1px solid #0672CB;
+        border-left: 0;
+        /* margin-top: 10px; */
+        padding: 10px;
+    }
+}
+@media (max-width:1590px) {
+    .for_text_align{
+        flex-direction: column;
+        align-items: start;
+        gap: 2px;
+    }
+    .view_more{
+        display: flex;
+        gap: 7px;
+        align-items: center;
+    }
+    .my_row{
+        flex-direction: column;
+    }
+    .card_price_text{
+        text-align: start;
+    }
+    .below-price{
+        text-align: start;
+    }
+    .price-div{
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 1360px){
+    .specs{
+        display: none;
+    }
+}
+@media (max-width: 992px) {
+    .Hero-item-1 {
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 40px;
+        font-style: normal;
+        color: #ffffff;
+    }
+
+    .Hero-item-2 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 32px;
+        font-style: normal;
+        color: #ffffff;
+    }
+}
+@media (max-width: 576px) {
+    .Hero-item-1 {
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 36px;
+        font-style: normal;
+        color: #ffffff;
+    }
+    
+    .Hero-item-2 {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 30px;
+        font-style: normal;
+        color: #ffffff;
+    }
+}
+
+/* Minimum_Width-----------*/
+@media (min-width: 992px) {
+    .inner{
+        display: none;
+        background-color: red;
+    }
+    .para{
+        display: none;
+    }
+}
+
+@media (min-width: 1365px) {
+    .pr-price{
+        margin-left: 140px;
+    }
+}
+@media (min-width:1360px){
+    .view_more{
+        display: none;
+    }
+}
+@media (min-width: 992px) {
+    .Hero-item-1 {
+        font-size: 40px;
+        font-weight: 300;
+        line-height: 48px;
+        font-style: normal;
+        color: #ffffff;
+    }
+
+    .Hero-item-2 {
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 36px;
+        font-style: normal;
+        color: #ffffff;
+    }
+}
+

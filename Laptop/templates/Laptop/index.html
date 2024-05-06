@@ -1,7 +1,193 @@
 {% extends "Laptop/Base.html" %}
-
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "Laptop/css/style.css" %}">
+{% endblock css %}
 {% block content %}
 
-<h1>This is laptop website</h1>
+<div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-center nav-div">
+        <div class="nav-item active text-center p-3 ms-1 nav-bar top-nav">Laptops</div>
+        <div class="nav-item text-center top-nav p-3  ms-1 nav-bar">Every Day</div>
+        <div class="nav-item text-center top-nav p-3 ms-1 nav-bar">Performance</div>
+        <div class="nav-item text-center top-nav p-3 ms-1 nav-bar">Gaming</div>
+    </div>
+</div>
 
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-7 p-0 order-lg-2" style="height: 460px;">
+            <img class="img-fluid d-block h-100" src="{% static "Laptop/images/Hero.avif" %}"
+                style="object-fit: cover;" alt="ddd">
+        </div>
+        <div class="col-lg-5 d-flex align-items-center order-lg-1" id="Hero-div" style="background-color: #004A77;">
+            <div class="p-3 ms-lg-3">
+                <h1 class="Hero-item-1" id="Hero-Heading">Laptop Computers</h1>
+                <h2 class="Hero-item-2">Shop the Best Laptops and Notebooks from Dell.</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+<p class="mt-3 ms-3 para">Sort By:</p>
+<div class="container-fluid d-flex filter-div gap-4">
+    <div class="inner inner-1"><span class="ms-3 mt-1"></span>Relevance</div>
+    <div class="inner inner-2" id="toggleButton">Filters</div>
+</div>
+
+
+<div class="container-fluid mt-4 border">
+    <div class="row">
+        <div class="col-lg-3 acc-div">
+
+            <!-- Accordian Section starts from here  -->
+
+            <div class="accordion mt-4 p-2" id="accordionFlushExample">
+                <div class="accordion-item custom-class" style="background-color: #F5F6F7;">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button custom-class collapsed" style="background-color: #F5F6F7;"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                            aria-expanded="false" aria-controls="flush-collapseOne">
+                            Product Line
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne">
+                        <div class="accordion-body">
+                            <form action="" class="" method="get">
+                                {% csrf_token %}
+                                {% for line in pro_line %}
+                                <div class="p-1">
+
+                                    <input type="checkbox" id="checkbox{{ forloop.counter }}"
+                                        name="checkbox{{ forloop.counter }}" value="{{ line.id }}"
+                                        data-field="product_line">
+                                    <label for="checkbox{{ forloop.counter }}">{{ line }}</label>
+                                </div>
+
+
+
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="accordion-item custom-class" style="background-color: #F5F6F7;">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" style="background-color: #F5F6F7;" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                            aria-controls="flush-collapseTwo">
+                            PC Screen Sizes
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
+                        <div class="accordion-body">
+                            <form action="" method="get">
+                                {% csrf_token %}
+                                <div class="p-1">
+                                    <input type="checkbox" name="size1" value="18" data-field="display" class="p-2">
+                                    <label for="size1">18 inch</label>
+                                </div>
+                                <div class="p-1">
+                                    <input type="checkbox" name="size1" value="17" data-field="display">
+                                    <label for="size2">17 inch</label>
+                                </div>
+                                <div class="p-1">
+                                    <input type="checkbox" name="size1" value="16" data-field="display">
+                                    <label for="size3">16 inch</label>
+                                </div>
+                                <div class="p-1">
+                                    <input type="checkbox" name="size1" value="15" data-field="display">
+                                    <label for="size4">15 inch</label>
+                                </div>
+                                <div class="p-1">
+                                    <input type="checkbox" name="size1" value="14" data-field="display">
+                                    <label for="size5">14 inch</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% include "Laptop/partial_data.html" %}
+
+    </div>
+</div>
+<div id="load-more" style="display: none;"> <!-- Hidden initially -->
+    <img src="loading.gif" alt="Loading...">
+</div>
+
+
+<!-- <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center my-5">
+        {% if products.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="j">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {% endif %}
+        <li class="page-item"><a class="page-link" href="#">{{products.number}}</a></li>
+        {% if products.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{products.next_page_number}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav> -->
+
+</div>
+
+
+
+{% block js %}
+<script src="{% static "Laptop/js/index.js" %}"></script>
+
+<script>
+    var nextPage = 2; // Assuming the first page is already loaded
+    var loading = false;
+    var hasMorePages = true; // Initially assume there are more pages
+    
+    window.onscroll = function () {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !loading && hasMorePages) {
+            // When user reaches the bottom of the page
+            fetchMorePosts();
+        }
+    };
+    
+    function fetchMorePosts() {
+        console.log("we entered in the function")
+        loading = true;
+        document.getElementById('load-more').style.display = 'block'; 
+        fetch('/load-more-products?page=' + nextPage)
+            .then(response => response.json()) // Parse JSON response
+            .then(data => {
+                // Append new posts to the existing ones
+                console.log("this is infinite scrolling")
+                document.getElementById('product-container').insertAdjacentHTML('beforeend', data.html);
+                if (data.has_next) {
+                    nextPage++; // Increment page number if there's a next page
+                } else {
+                    hasMorePages = false; // No more pages, stop infinite scrolling
+                    // Hide load more button if there's no next page
+                    document.getElementById('load-more').style.display = 'none';
+                }
+                loading = false; // Reset loading state
+            })
+            .catch(error => {
+                console.error('Error fetching more posts:', error);
+                loading = false; // Reset loading state on error
+                document.getElementById('load-more').style.display = 'none'; // Hide loading spinner on error
+            });
+    }
+    
+</script>
+
+{% endblock js %}
 {% endblock content %}
