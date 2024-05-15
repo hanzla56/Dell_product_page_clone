@@ -7,28 +7,41 @@
 
 <div class="container mt-5" id="form_container">
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 d-flex align-items-center" style="background-color: #0672CB;">
-      <form action="" method="post" id="edit_form" enctype="multipart/form-data"
-        class=" d-inline-block mx-auto p-5">
-        <input type="text" name="name" class="form-control" placeholder="Enter Product name"
-          value="{{ s_product.name }}">
-        <br>
-        {% csrf_token %}
-        <input type="text" name="price" class="form-control" placeholder="Enter Price" value="{{ s_product.price }}">
-        <br>
-        <input type="text" name="memory" class="form-control" placeholder="Enter Memory" value="{{ s_product.memory }}">
-        <br>
-        <input type="text" name="os" class="form-control" placeholder="Enter os" value="{{ s_product.os }}">
-        <br>
-        <input type="text" name="processor" class="form-control" placeholder="Enter Processor"
-          value="{{ s_product.full_processor_details }}">
-        <br>
-        <input type="submit" class="form-control" name="" id="">
-      </form>
+    <div class="col-md-12">
+      <div class="d-flex align-items-center" style="background-color: white; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);">
+        <form action="" method="post" id="edit_form" enctype="multipart/form-data" class="mx-auto p-5">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 mb-3">
+              <label for="product_name" class="form-label text-primary ">Product Name</label>
+              <input type="text" id="product_name" name="name" class="form-control" placeholder="Enter Product name" value="{{ s_product.name }}">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+              <label for="product_price" class="form-label text-primary">Price</label>
+              <input type="text" id="product_price" name="price" class="form-control" placeholder="Enter Price" value="{{ s_product.price }}">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+              <label for="product_memory" class="form-label text-primary">Memory</label>
+              <input type="text" id="product_memory" name="memory" class="form-control" placeholder="Enter Memory" value="{{ s_product.memory }}">
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3">
+              <label for="product_os" class="form-label text-primary">Operating System</label>
+              <input type="text" id="product_os" name="os" class="form-control" placeholder="Enter OS" value="{{ s_product.os }}">
+            </div>
+            <div class="col-sm-12 mb-3">
+              <label for="product_processor" class="form-label text-primary">Processor</label>
+              <input type="text" id="product_processor" name="processor" class="form-control" placeholder="Enter Processor" value="{{ s_product.full_processor_details }}">
+            </div>
+            <div class="col-12">
+              {% csrf_token %}
+              <input type="submit" class="form-control btn btn-light text-primary" value="Submit">
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
 
 
 <div class="container-fluid mt-5">

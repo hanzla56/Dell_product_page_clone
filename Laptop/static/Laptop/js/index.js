@@ -1,122 +1,91 @@
 function toggle_view() {
-  let view_more_btn = document.getElementById("view");
-  let text_change = document.getElementById("text_change");
-  console.log(view_more_btn);
-  let specs = document.querySelector(".specs");
-  console.log(specs);
+  // Select all view more buttons
+  let viewMoreBtns = document.querySelectorAll(".view_more");
 
-  // View more button js
-  view_more_btn.addEventListener("click", function () {
-    var myentity = document.getElementById("entity");
-    console.log("event run");
-    if (specs.style.display === "block") {
-      specs.style.display = "none";
-      myentity.style.transform = "rotate(0deg)";
-      text_change.textContent = "View More Specs";
-    } else {
-      specs.style.display = "block";
-      myentity.style.transform = "rotate(-90deg)";
+  // Loop through each view more button
+  viewMoreBtns.forEach(viewMoreBtn => {
+      // Add click event listener to each button
+      viewMoreBtn.addEventListener("click", function() {
+          // Find the closest specs section relative to the clicked button
+          let specs = this.closest(".product").querySelector(".specs");
 
-      text_change.textContent = "View Less Specs";
-    }
+          // Toggle the visibility of the specs section
+          if (specs.style.display === "block") {
+              specs.style.display = "none";
+              this.querySelector('.text_change').textContent = "View More Specs";
+              this.querySelector('.entity').style.transform = "rotate(0deg)";
+          } else {
+              specs.style.display = "block";
+              this.querySelector('.text_change').textContent = "View Less Specs";
+              this.querySelector('.entity').style.transform = "rotate(-90deg)";
+          }
+      });
   });
 }
 
-console.log("this is toggle view")
-toggle_view()
+// Call the function to apply the toggle functionality
+toggle_view();
 
-// let view_more_btn = document.getElementById("view");
-// let text_change = document.getElementById("text_change");
-// console.log(view_more_btn);
-// let specs = document.querySelector(".specs");
-// console.log(specs);
+function setupLazyLoading() {
+  console.log("Setting up lazy loading...");
 
-// // View more button js
-// view_more_btn.addEventListener("click", function () {
-//   var myentity = document.getElementById("entity");
-//   console.log("event run");
-//   if (specs.style.display === "block") {
-//     specs.style.display = "none";
-//     myentity.style.transform = "rotate(0deg)";
-//     text_change.textContent = "View More Specs";
-//   } else {
-//     specs.style.display = "block";
-//     myentity.style.transform = "rotate(-90deg)";
+  const divSelector = ".lazy-div";
+  const imgSelector = "img[data-src]";
+  const contentSelector = ".lazy-content";
 
-//     text_change.textContent = "View Less Specs";
-//   }
-// });
+  // Callback function for the Intersection Observer
+  const callback = (entries) => {
+    entries.forEach((entry) => {
+      // Check if the observed element is intersecting the root (viewport)
+      if (entry.isIntersecting) {
+        const div = entry.target;  // The element being observed
+        const images = div.querySelectorAll(imgSelector);  // Select all images within this div
+        const content = div.querySelectorAll(contentSelector);  // Select all lazy content within this div
 
-// const callback = entries => {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting) {
-//       const image = entry.target;
-//       const src = image.getAttribute('data-src');
-//       if (src) {
-//         image.setAttribute('src', src);
-//         observer.unobserve(image);
-//       }
-//     }
-//   });
-// };
+        // Lazy load images by setting their src attributes
+        images.forEach((img) => {
+          const src = img.getAttribute("data-src");
+          if (src) {
+            img.setAttribute("src", src);
+          }
+        });
 
-// // Set up the options object for the Intersection Observer
-// const options = {
-//   root: null,
-//   threshold: 0
-// };
+        // Remove the lazy-content class to reveal the content
+        content.forEach((c) => {
+          console.log("enter to remove");
+          c.classList.remove(contentSelector.replace(".", ""));  // Remove the leading dot
+          console.log("class removed");
+        });
+      }
+    });
+  };
 
-// // Create a new Intersection Observer instance with a callback function:
-// const observer = new IntersectionObserver(callback, options);
+  // Set up the options object for the Intersection Observer
+  const options = {
+    root: null,  // Use the viewport as the root
+    rootMargin: "0px",  // No margin around the root
+    threshold: 0.1,  // Trigger the callback when 10% of the element is visible
+  };
 
-// const lazyImages = document.querySelectorAll('.lazy-image')
-// lazyImages.forEach(image =>{
-//   observer.observe(image)
-// })
+  // Create a new Intersection Observer instance with the callback function
+  const observer = new IntersectionObserver(callback, options);
 
-console.log("this is the observer api");
+  // Select the div elements you want to lazy load
+  const lazyDivs = document.querySelectorAll(divSelector);
+  console.log(`Found ${lazyDivs.length} elements with selector ${divSelector}`);
 
-const callback = (entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const div = entry.target;
-      const images = div.querySelectorAll("img");
-      const content = div.querySelectorAll(".lazy-content");
-      console.log(`this is content${content}`);
-      images.forEach((img) => {
-        const src = img.getAttribute("data-src");
-        if (src) {
-          img.setAttribute("src", src);
-        }
-      });
-      content.forEach((c) => {
-        console.log("enter to remove");
-        c.classList.remove("lazy-content");
-        console.log("class remove");
-      });
-    }
+  // Observe each lazy div element
+  lazyDivs.forEach((div) => {
+    console.log("for each is running");
+    observer.observe(div);  // Start observing this div
   });
-};
+}
 
-// Set up the options object for the Intersection Observer
-const options = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.1, // Trigger when the entire element is visible within the viewport
-};
+// Usage example:
+setupLazyLoading();
 
-// Create a new Intersection Observer instance with a callback function:
-const observer = new IntersectionObserver(callback, options);
 
-// Select the div elements you want to lazy load
-const lazyDivs = document.querySelectorAll(".lazy-div");
-console.log(`this is lazy divs ${lazyDivs}`);
 
-// Observe each lazy div element
-lazyDivs.forEach((div) => {
-  console.log("for each is running");
-  observer.observe(div);
-});
 
 // This is the filter buttons events
 document.addEventListener("DOMContentLoaded", function () {
@@ -136,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 let second_div = document.getElementsByClassName("additional-checkbox");
 
-function attachEventListeners() {
+function change_Mainimg() {
   let productCards = document.querySelectorAll(".product-images");
   console.log(productCards);
 
@@ -154,26 +123,50 @@ function attachEventListeners() {
     });
   });
 }
-attachEventListeners();
-// Toggle custom-active Class
-const images = document.querySelectorAll(".small");
+change_Mainimg();
 
-// Loop through each image
-images.forEach((image) => {
-  image.addEventListener("click", () => {
-    if (!image.classList.contains("custom-active")) {
-      images.forEach((otherImage) => {
-        if (otherImage !== image) {
+
+function toggleCustomActiveClass() {
+  // Select all images with class "small"
+  const images = document.querySelectorAll(".small");
+
+  // Loop through each image
+  images.forEach((image) => {
+    // Add click event listener to each image
+    image.addEventListener("click", () => {
+      // Find the parent product container of the clicked image
+      const productContainer = image.closest(".product");
+
+      // Toggle the class only within the specific product container
+      if (!image.classList.contains("custom-active")) {
+        // Remove "custom-active" class from all images within the product container
+        productContainer.querySelectorAll(".small").forEach((otherImage) => {
           otherImage.classList.remove("custom-active");
           otherImage.classList.add("custom-hover");
-        }
-      });
-      image.classList.toggle("custom-active");
-    }
+        });
+
+        // Add "custom-active" class to the clicked image
+        image.classList.add("custom-active");
+      } else {
+        // If the clicked image already has "custom-active" class, remove it
+        image.classList.remove("custom-active");
+      }
+    });
   });
-});
+}
+
+// Call the function to enable the toggle functionality
+toggleCustomActiveClass();
+
+
+
+
 const productContainer = document.getElementById("product-container");
 console.log(`this is product container ${productContainer}`)
+
+
+
+// function for updating cards after filtering or performing ajax request
 function UpdateProductCards(products) {
   console.log("enter in the function");
   const productContainer = document.getElementById("product-container");
@@ -385,6 +378,7 @@ function applyFilters() {
     .then((response) => response.json())
     .then((data) => {
       UpdateProductCards(data.data);
+      setupLazyLoading()
       toggle_view();
       attachEventListeners();
       console.log(data);

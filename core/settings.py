@@ -40,6 +40,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "Laptop",
+    "secondapp",
+    "allauth",
+    "allauth.account",
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware"
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -131,3 +139,57 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+
+#STEP 3:
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    },
+        'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+    },
+
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'gender',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v7.0',
+    }
+}
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+SOCIALACCOUNT_LOGIN_ON_GET = True
+AUTH_USER_MODEL = 'secondapp.User_Data'
+LOGIN_REDIRECT_URL = '/'
+
+

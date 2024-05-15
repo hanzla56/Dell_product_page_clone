@@ -111,7 +111,9 @@
                 </div>
             </div>
         </div>
-{% include "Laptop/partial_data.html" %}
+        <div class="col-lg-9">
+            {% include "Laptop/partial_data.html" %}
+        </div>
 
     </div>
 </div>
@@ -171,6 +173,7 @@
                 // Append new posts to the existing ones
                 console.log("this is infinite scrolling")
                 document.getElementById('product-container').insertAdjacentHTML('beforeend', data.html);
+               
                 if (data.has_next) {
                     nextPage++; // Increment page number if there's a next page
                 } else {
@@ -178,6 +181,10 @@
                     // Hide load more button if there's no next page
                     document.getElementById('load-more').style.display = 'none';
                 }
+                setupLazyLoading();
+                toggle_view();
+                change_Mainimg();
+                toggleCustomActiveClass();
                 loading = false; // Reset loading state
             })
             .catch(error => {

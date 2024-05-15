@@ -25,7 +25,7 @@ def listProduct(request):
     products = Laptop.objects.all()
     pro_line = product_line.objects.all()
     
-    paginated = Paginator(products,3)  #This is the paginator class which Django used for pagination 
+    paginated = Paginator(products,2)  #This is the paginator class which Django used for pagination 
     page_number = request.GET.get('page')
     
     try:
@@ -37,18 +37,20 @@ def listProduct(request):
 
 def load_more_products(request):
     products = Laptop.objects.all()
-    paginated = Paginator(products, 3)
+    paginated = Paginator(products,2)
     print(paginated)
     page_number = request.GET.get('page')
     print(page_number)
     
     try:
         products_page = paginated.get_page(page_number)
+        print(products_page)
     except PageNotAnInteger:
         products_page = paginated.page(1)
     
-    html_content = render_to_string('Laptop/partial_data.html', {'products': products})
-    print(html_content)
+    html_content = render_to_string('Laptop/partial_data.html', {'products': products_page})
+    print(products)
+    # print(html_content)
     return JsonResponse({'html': html_content, 'has_next': products_page.has_next()})
 
 

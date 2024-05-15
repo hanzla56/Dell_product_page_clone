@@ -4,7 +4,7 @@ body{
 /* *{
     border: 1px solid #000;
 } */
-.view_more #text_change,
+.view_more .text_change,
 .view_more #entity {
     color: rgb(0, 99, 184);
 }
@@ -47,6 +47,9 @@ body{
 .custom-active{
     border: 2px solid #007DB8;
     padding: 3px;
+}
+.custom-hover{
+    border: 1px solid grey;
 }
 .custom-hover:hover{
     border: 2px solid #007DB8;
