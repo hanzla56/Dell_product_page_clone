@@ -39,7 +39,7 @@ class order(models.Model):
     product = models.ForeignKey(Laptop, null=True,blank=True, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     total_price = models.DecimalField(max_digits=10, null=True,blank=True, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True,blank=True)
     
     def __str__(self) -> str:
         return self.product.name
