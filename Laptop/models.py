@@ -6,8 +6,11 @@ from django.utils.safestring import mark_safe
 from io import BytesIO
 from PIL import Image
 
+from secondapp.models import User_Data
+
 
 #Now I am creating models here
+    
 class product_line(models.Model):
     name = models.CharField(max_length=30)
     
@@ -29,6 +32,18 @@ class Laptop(models.Model):
     
     def __str__(self):
         return self.name
+    
+    
+class order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,blank=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Laptop, null=True,blank=True, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    total_price = models.DecimalField(max_digits=10, null=True,blank=True, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return self.product.name
+    
     
     
 class Product_image(models.Model):

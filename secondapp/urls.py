@@ -5,5 +5,5 @@ from secondapp import views
 app_name = 'secondapp'
 
 urlpatterns = [
-    path("signup/",views.signup,name='signup')
+    # path("",views.signup,name='signup')
 ]

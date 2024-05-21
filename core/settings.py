@@ -65,7 +65,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR/'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,6 +79,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+
+ACCOUNT_FORMS = {
+    'signup': 'secondapp.forms.CustomSignupForm',
+    'login':'secondapp.forms.LoginForm',
+}
 
 
 # Database
@@ -134,6 +139,7 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #Media Folder settings 
 
@@ -188,8 +194,13 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+ACCOUNT_LOGOUT_ON_GET = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 AUTH_USER_MODEL = 'secondapp.User_Data'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = '/'
 
 
+STRIPE_SECRET_KEY = "sk_test_51PFxtcHdyG3oyik5M95ZhE6oPdPbGmDS9vGUhn6JswgpNdEeVbMyBjDINP8kwXp7LgXfxBJb6hyGwgoFmxEInwsj00m4oKWced"
+STRIPE_PUBLISHABLE_KEY = "pk_test_51PFxtcHdyG3oyik5dDGQiYA3wDobmDrPkv8JLqNbusnVLNbZJjyamSsEPXUI6amybT6J5aGQudMKjB2Z1acEwdQQ00ctHaZ3xq"
+STRIPE_WEBHOOK_SECRET = "whsec_880ae4c1734429ef00ed5040e6384767681f9e6379192a632399e3da8976c02e"

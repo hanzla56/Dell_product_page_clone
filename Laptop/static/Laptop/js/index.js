@@ -1,6 +1,6 @@
 function toggle_view() {
   // Select all view more buttons
-  let viewMoreBtns = document.querySelectorAll(".view_more");
+  let viewMoreBtns = document.querySelectorAll(".view_more")
 
   // Loop through each view more button
   viewMoreBtns.forEach(viewMoreBtn => {
@@ -143,14 +143,15 @@ function toggleCustomActiveClass() {
         productContainer.querySelectorAll(".small").forEach((otherImage) => {
           otherImage.classList.remove("custom-active");
           otherImage.classList.add("custom-hover");
-        });
-
+          image.classList.add("custom-active")
+        }); 
+        
         // Add "custom-active" class to the clicked image
-        image.classList.add("custom-active");
       } else {
         // If the clicked image already has "custom-active" class, remove it
         image.classList.remove("custom-active");
       }
+      image.classList.add("custom-active");
     });
   });
 }
@@ -209,7 +210,7 @@ function UpdateProductCards(products) {
                     <div class="col-md-8 py-4">
                         <div class="row my_row">
                                 <div class="col-lg-4 col-md-12 col-sm-12">
-                                    <h3 class="text-nowrap ms-2 " id="product-title"><a href="detail_product/{{product.id}}" id="product-link">{{ product.name }}</a></h3>
+                                    <h3 class="text-nowrap ms-2" id="product-title"><a href="detail_product/${product.id}" id="product-link">{{ product.name }}</a></h3>
                                     <span id="product-model" class="ms-2">Model: {{product.model}}</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12 price-div">
@@ -304,11 +305,26 @@ function UpdateProductCards(products) {
                 </div>
 
             </div>
+
+ 
+           
             
         `;
 
     productContainer.innerHTML += productCardHTML;
+    // Get all child elements of the container
+    const childElements = productContainer.children;
+
+// Get the second-to-last child element
+    if (childElements.length >= 2) {
+    const secondToLastElement = childElements[childElements.length - 2];
+    // Now you have the second-to-last element and you can manipulate it as needed
+    console.log(secondToLastElement.innerText); // Example: Outputs the inner text of the second-to-last element
+  }  else {
+    console.log("There are not enough child elements in the container.");
+  }
     const newProductCard = productContainer.lastElementChild;
+    console.log(`this is new product card ${newProductCard}`)
     newProductCard.querySelector("#product-link").textContent = product.name;
     newProductCard.querySelector(
       "#product-model"

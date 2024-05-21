@@ -1,9 +1,7 @@
 <!-- Products list section start from here  -->
 <div class="product-card post-list" id="product-container">
   {% for product in products %}
-  <div
-    class="mt-4 custom-rounded-top border border-danger lazy-div product"
-    style="background-color: #f5f6f7">
+  <div class="mt-4 custom-rounded-top border border-danger lazy-div product" style="background-color: #f5f6f7">
     <div class="row">
       <!-- Product Image section starts from here -->
       <div class="col-md-4 d-flex p-2 product-images">
@@ -20,9 +18,9 @@
             <div class="circle circle2" id=""></div>
           </div>
         </div>
-        <div class="order-1 p-3 mt-3">
+        <div class="order-1 mt-4 ms-3">
           <br />
-          <div class="p-1 mt-3 small custom-active" style="height: 35px">
+          <div class="mt-3 small custom-active" style="height: 35px">
             <img
               data-src="{{product.main_img.url}}"
               class="change-img"
@@ -60,13 +58,13 @@
             >
           </div>
           <div class="col-lg-8 col-md-12 col-sm-12 price-div">
-            <div class="card_price_text">
+            <div class="card_price_text me-lg-3">
               <span class="">Starting at</span>
               <span id="product-price" style="font-size: 20px"
                 >${{product.price}}.00</span
               >
             </div>
-            <div class="below-price mt-1">
+            <div class="below-price mt-1 me-lg-3">
               <span class="p-2">Financing Offers</span>
               <span class="p-1 L-m L-m-n">Learn More</span>
               <span class="L-m-n">Pre-Qualify</span>
@@ -172,9 +170,19 @@
             </button>
           </span>
           <span class="col-md-5">
-            <button class="p-2 px-lg-3 btn btn-light w-100" id="product-btn-2">
-              Customize
-            </button>
+            <form
+              action="/create-checkout-session/{{product.id}}/"
+              method="POST"
+            >
+              {% csrf_token %}
+              <button
+                type="submit"
+                class="p-2 px-lg-3 btn btn-light w-100"
+                id="product-btn-2"
+              >
+                Buy Now
+              </button>
+            </form>
           </span>
         </div>
       </div>
